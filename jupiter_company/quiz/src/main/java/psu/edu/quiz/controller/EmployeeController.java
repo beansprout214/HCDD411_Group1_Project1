@@ -41,19 +41,6 @@ public class EmployeeController {
         return "list-employees";
     }
 
-    
-	// add mapping for "/list"    
-	@GetMapping("/list/filtered")
-    public String listFilteredEmployees(Model theModel) {
-        
-		// get the employees from db
-        List<Employee> theEmployees = employeeService.findAllSalaryGreaterThan(45000);
-        
-        // add to the spring model
-        theModel.addAttribute("employees", theEmployees);
-        return "list-employees";
-    }
-
 	@GetMapping("/showFormForAdd")
 	public String showFormForAdd(Model theModel) {
 		// create model attribute to bind form data
