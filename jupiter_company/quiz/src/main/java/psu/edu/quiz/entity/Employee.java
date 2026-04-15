@@ -147,6 +147,10 @@ public class Employee {
 		this.emergency_contact_name = emergency_contact_name;
 		this.emergency_contact_phone = emergency_contact_phone;
 	}
+	
+	public Employee() {
+		
+	}
 
 	@Override
 	public String toString() {
