@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>HCDD 411 - Access Denied</title>
+	<style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+		}
+
+		body {
+			background-color: #eaeded;
+			color: #111;
+		}
+
+		/* Header */
+		.header {
+		    background-color: #131921;
+		    color: #fff;
+		    padding: 14px 24px;
+		    display: flex;
+		    align-items: center;
+		    gap: 12px;
+		}
+
+		.logo {
+		    font-size: 26px;
+		    font-weight: bold;
+		    color: #ff9900;
+		}
+
+		.logo span {
+		    color: #fff;
+		    font-size: 18px;
+		    margin-left: 4px;
+		}
+
+		.main {
+			max-width: 900px;
+			margin: 32px auto;
+			background-color: #fff;
+			border-radius: 4px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			padding: 24px 32px 32px;
+		}
+
+		.breadcrumb {
+			font-size: 12px;
+			color: #565959;
+			margin-bottom: 12px;
+		}
+
+		.breadcrumb a {
+			color: #007185;
+			text-decoration: none;
+		}
+
+		.breadcrumb a:hover {
+			text-decoration: underline;
+		}
+
+		.denied-container {
+			display: flex;
+			gap: 24px;
+		}
+
+		.denied-icon {
+			font-size: 64px;
+			color: #cc0c39;
+		}
+
+		.denied-content h2 {
+			font-size: 22px;
+			margin-bottom: 8px;
+		}
+
+		.denied-content p {
+			font-size: 14px;
+			margin-bottom: 10px;
+		}
+
+		.denied-content ul {
+			margin-left: 18px;
+			margin-bottom: 16px;
+			font-size: 13px;
+			color: #565959;
+		}
+
+		.denied-content ul li {
+			margin-bottom: 4px;
+		}
+
+		.back-link {
+			display: inline-block;
+			margin-top: 8px;
+			font-size: 14px;
+			color: #007185;
+			text-decoration: none;
+		}
+
+		.back-link:hover {
+			text-decoration: underline;
+		}
+
+		.primary-btn {
+			display: inline-block;
+			margin-top: 16px;
+			background-color: #ffd814;
+			border-radius: 20px;
+			border: 1px solid #fcd200;
+			padding: 6px 18px;
+			font-size: 13px;
+			cursor: pointer;
+			text-decoration: none;
+			color: #111;
+		}
+
+		.primary-btn:hover {
+			background-color: #f7ca00;
+		}
+
+		.footer {
+			margin-top: 40px;
+			padding: 20px 0 30px;
+			font-size: 12px;
+			color: #565959;
+			text-align: center;
+		}
+
+		.footer a {
+			color: #007185;
+			text-decoration: none;
+			margin: 0 6px;
+		}
+
+		.footer a:hover {
+			text-decoration: underline;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header">
+	    <div class="logo">hcdd<span>market</span></div>
+	</div>
+
+
+	<div class="main">
+		<div class="breadcrumb">
+			<a th:href="@{/}">Home</a> › Access Denied
+		</div>
+
+		<div class="denied-container">
+			<div class="denied-icon">🚫</div>
+			<div class="denied-content">
+				<h2>Access Denied</h2>
+				<p>You are not authorized to access this page or perform this action.</p>
+				<p>Possible reasons:</p>
+				<ul>
+					<li>Your current role does not have permission for this operation.</li>
+					<li>You may need a higher access level (e.g., Manager, Director, or Admin).</li>
+					<li>You followed an outdated link or bookmarked a restricted page.</li>
+				</ul>
+
+				<a class="primary-btn" th:href="@{/}">Back to Home Page</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer">
+		<div>
+			<a th:href="@{/}">Home</a>
+			|
+			<a href="#">Help</a>
+			|
+			<a href="#">Privacy</a>
+			|
+			<a href="#">Terms</a>
+		</div>
+		<div style="margin-top: 6px;">
+			HCDD 411 Employee Management Portal &copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2024</span>
+		</div>
+	</div>
+
+</body>
+
+</html>

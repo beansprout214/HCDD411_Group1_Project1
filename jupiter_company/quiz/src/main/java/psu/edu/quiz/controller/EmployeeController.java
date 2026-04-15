@@ -1,0 +1,86 @@
+package psu.edu.quiz.controller;
+
+import java.util.List;
+
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+ 
+import psu.edu.quiz.entity.Employee;
+import psu.edu.quiz.service.EmployeeService;
+
+
+@Controller
+
+
+@RequestMapping("/employees")
+public class EmployeeController {
+	
+	private EmployeeService employeeService;
+    
+	public EmployeeController(EmployeeService theEmployeeService) {
+        employeeService = theEmployeeService;
+    }
+    
+	// add mapping for "/list"    
+	@GetMapping("/list")
+    public String listEmployees(Model theModel) {
+        
+		// get the employees from db
+        List<Employee> theEmployees = employeeService.findAll();
+        
+        // add to the spring model
+        theModel.addAttribute("employees", theEmployees);
+        return "list-employees";
+    }
+
+    
+	// add mapping for "/list"    
+	@GetMapping("/list/filtered")
+    public String listFilteredEmployees(Model theModel) {
+        
+		// get the employees from db
+        List<Employee> theEmployees = employeeService.findAllSalaryGreaterThan(45000);
+        
+        // add to the spring model
+        theModel.addAttribute("employees", theEmployees);
+        return "list-employees";
+    }
+
+	@GetMapping("/showFormForAdd")
+	public String showFormForAdd(Model theModel) {
+		// create model attribute to bind form data
+		Employee theEmployee = new Employee();
+		theModel.addAttribute("employee", theEmployee);
+		return "employee-form";
+	}
+
+	@GetMapping("/showFormForUpdate")
+	public String showFormForUpdate(@RequestParam("empno") int theId,Model theModel) {
+		
+		Employee theEmployee = employeeService.findById(theId);
+		theModel.addAttribute("employee",theEmployee);
+		return "employee-form";
+	}
+
+	@PostMapping("/save")
+	public String saveEmployee(@ModelAttribute("empno") Employee theEmployee) {
+		employeeService.save(theEmployee);
+		
+		return "redirect:/employees/list";
+	}
+	
+	@GetMapping("/delete")
+	public String delete(@RequestParam("empno") int theId) {
+		employeeService.deleteById(theId);
+		
+		return "redirect:/employees/list";
+	}
+}

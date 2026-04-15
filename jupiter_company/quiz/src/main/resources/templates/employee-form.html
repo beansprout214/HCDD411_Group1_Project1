@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Save Employee - hcddmarket</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #eaeded;
+            color: #111;
+        }
+
+        /* Header */
+        .header {
+            background-color: #131921;
+            color: #fff;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #ff9900;
+        }
+
+        .logo span {
+            color: #fff;
+            font-size: 18px;
+            margin-left: 4px;
+        }
+
+        /* Main container */
+        .main {
+            max-width: 700px;
+            margin: 40px auto;
+            background-color: #fff;
+            padding: 32px 40px;
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 16px;
+            border: 1px solid #a6a6a6;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .amazon-btn {
+            background-color: #f7ca00;
+            border: 1px solid #f2c200;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #111;
+        }
+
+        .amazon-btn:hover {
+            background-color: #eebd00;
+        }
+
+        .secondary-btn {
+            background-color: #e7e9ec;
+            border: 1px solid #adb1b8;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #111;
+        }
+
+        .secondary-btn:hover {
+            background-color: #d7d9dc;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding: 20px 0 30px;
+            font-size: 12px;
+            color: #565959;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #007185;
+            text-decoration: none;
+            margin: 0 6px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">hcdd<span>market</span></div>
+</div>
+
+<div class="main">
+
+    <div class="title">Enter Employee Information</div>
+
+    <form action="#" th:action="@{/employees/save}" th:object="${employee}" method="POST">
+
+        <input type="hidden" th:field="*{empno}" />
+
+        <input type="text" th:field="*{first_name}" class="input-field" placeholder="First Name" required>
+
+        <input type="text" th:field="*{last_name}" class="input-field" placeholder="Last Name" required>
+
+        <input type="text" th:field="*{designation}" class="input-field" placeholder="Designation" required>
+
+        <input type="text" th:field="*{hiredate}" class="input-field" placeholder="Hire Date (e.g. 17-NOV-97)" required>
+
+        <input type="number" th:field="*{salary}" class="input-field" placeholder="Salary" required>
+
+        <input type="number" th:field="*{comm}" class="input-field" placeholder="Comm" required>
+
+        <input type="number" th:field="*{deptno}" class="input-field" placeholder="Department Number" required>
+
+        <button type="submit" class="amazon-btn">Save Employee</button>
+
+    </form>
+
+    <div style="margin-top: 20px;">
+        <a th:href="@{/employees/list}" class="secondary-btn">Back to Employees List</a>
+    </div>
+
+</div>
+
+<div class="footer">
+    <div>
+        <a th:href="@{/}">Home</a> |
+        <a href="#">Help</a> |
+        <a href="#">Privacy</a> |
+        <a href="#">Terms</a>
+    </div>
+    <div style="margin-top: 6px;">
+        HCDD 411 Employee Management Portal © <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2024</span>
+    </div>
+</div>
+
+</body>
+
+</html>
+```
