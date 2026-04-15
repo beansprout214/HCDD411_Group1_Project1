@@ -8,8 +8,6 @@ public interface EmployeeService {
 	
 	List<Employee> findAll();
 	
-	List<Employee> findAllSalaryGreaterThan(int salary);
-	
 	Employee findById(int theId);
 	
 	Employee save(Employee theEmployee);

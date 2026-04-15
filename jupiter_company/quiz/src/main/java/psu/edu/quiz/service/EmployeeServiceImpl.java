@@ -26,14 +26,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	
 	@Override
-	public List<Employee> findAllSalaryGreaterThan(int salary) {
-		return employeeRepository.findAll()
-	            .stream()
-	            .filter(e -> e.getSalary() > salary)
-	            .toList();
-	}
-	
-	@Override
 	public Employee findById(int theId) {
 		Optional<Employee> result = employeeRepository.findById(theId);
 		
