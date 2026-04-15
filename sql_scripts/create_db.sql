@@ -1,0 +1,1 @@
+CREATE DATABASE jupiter_employee_db; 
