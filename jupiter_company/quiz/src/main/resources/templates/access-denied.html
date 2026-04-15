@@ -17,28 +17,6 @@
 			color: #111;
 		}
 
-		/* Header */
-		.header {
-		    background-color: #131921;
-		    color: #fff;
-		    padding: 14px 24px;
-		    display: flex;
-		    align-items: center;
-		    gap: 12px;
-		}
-
-		.logo {
-		    font-size: 26px;
-		    font-weight: bold;
-		    color: #ff9900;
-		}
-
-		.logo span {
-		    color: #fff;
-		    font-size: 18px;
-		    margin-left: 4px;
-		}
-
 		.main {
 			max-width: 900px;
 			margin: 32px auto;
@@ -122,32 +100,10 @@
 		.primary-btn:hover {
 			background-color: #f7ca00;
 		}
-
-		.footer {
-			margin-top: 40px;
-			padding: 20px 0 30px;
-			font-size: 12px;
-			color: #565959;
-			text-align: center;
-		}
-
-		.footer a {
-			color: #007185;
-			text-decoration: none;
-			margin: 0 6px;
-		}
-
-		.footer a:hover {
-			text-decoration: underline;
-		}
 	</style>
 </head>
 
 <body>
-	<div class="header">
-	    <div class="logo">hcdd<span>market</span></div>
-	</div>
-
 
 	<div class="main">
 		<div class="breadcrumb">
@@ -168,21 +124,6 @@
 
 				<a class="primary-btn" th:href="@{/}">Back to Home Page</a>
 			</div>
-		</div>
-	</div>
-
-	<div class="footer">
-		<div>
-			<a th:href="@{/}">Home</a>
-			|
-			<a href="#">Help</a>
-			|
-			<a href="#">Privacy</a>
-			|
-			<a href="#">Terms</a>
-		</div>
-		<div style="margin-top: 6px;">
-			HCDD 411 Employee Management Portal &copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2024</span>
 		</div>
 	</div>
 
