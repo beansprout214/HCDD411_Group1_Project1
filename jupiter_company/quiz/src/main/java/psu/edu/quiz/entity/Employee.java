@@ -1,5 +1,7 @@
 package psu.edu.quiz.entity;
 
+import java.sql.Date;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -8,8 +10,8 @@ public class Employee {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="empno")
-	private Integer empno;
+	@Column(name="employee_id")
+	private Integer employee_id;
 	
 	@Column(name="first_name")
 	private String first_name;
@@ -17,45 +19,36 @@ public class Employee {
 	@Column(name="last_name")
 	private String last_name;
 	
-	@Column(name="designation")
-	private String designation;
+	@Column(name="start_date")
+	private Date start_date;
 	
-	@Column(name="hiredate")
-	private String hiredate;
+	@Column(name="start_salary")
+	private Double start_salary;
 	
-	@Column(name="salary")
-	private Integer salary;
+	@Column(name="contract_signed")
+	private String contract_signed;
 	
-	@Column(name="comm")
-	private Integer comm;
+	@Column(name="ssn")
+	private Integer ssn;
 	
-	@Column(name="deptno")
-	private Integer deptno;
+	@Column(name="birthdate")
+	private Date birthdate;
 	
-	public Employee()
-	{
-		
-	}
+	@Column(name="phone_number")
+	private String phone_number;
 	
-	public Employee(int empno, String first_name, String last_name, String designation, String hiredate, int salary,
-			int comm, int deptno) {
-		super();
-		this.empno = empno;
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.designation = designation;
-		this.hiredate = hiredate;
-		this.salary = salary;
-		this.comm = comm;
-		this.deptno = deptno;
+	@Column(name="emergency_contact_name")
+	private String emergency_contact_name;
+	
+	@Column(name="emergency_contact_phone")
+	private String emergency_contact_phone;
+
+	public Integer getEmployee_id() {
+		return employee_id;
 	}
 
-	public Integer getEmpno() {
-		return empno;
-	}
-
-	public void setEmpno(Integer empno) {
-		this.empno = empno;
+	public void setEmployee_id(Integer employee_id) {
+		this.employee_id = employee_id;
 	}
 
 	public String getFirst_name() {
@@ -74,57 +67,96 @@ public class Employee {
 		this.last_name = last_name;
 	}
 
-	public String getDesignation() {
-		return designation;
+	public Date getStart_date() {
+		return start_date;
 	}
 
-	public void setDesignation(String designation) {
-		this.designation = designation;
+	public void setStart_date(Date start_date) {
+		this.start_date = start_date;
 	}
 
-	public String getHiredate() {
-		return hiredate;
+	public Double getStart_salary() {
+		return start_salary;
 	}
 
-	public void setHiredate(String hiredate) {
-		this.hiredate = hiredate;
+	public void setStart_salary(Double start_salary) {
+		this.start_salary = start_salary;
 	}
 
-	public Integer getSalary() {
-		return salary;
+	public String getContract_signed() {
+		return contract_signed;
 	}
 
-	public void setSalary(Integer salary) {
-		this.salary = salary;
+	public void setContract_signed(String contract_signed) {
+		this.contract_signed = contract_signed;
 	}
 
-	public Integer getComm() {
-		return comm;
+	public Integer getSsn() {
+		return ssn;
 	}
 
-	public void setComm(Integer comm) {
-		this.comm = comm;
+	public void setSsn(Integer ssn) {
+		this.ssn = ssn;
 	}
 
-	public Integer getDeptno() {
-		return deptno;
+	public Date getBirthdate() {
+		return birthdate;
 	}
 
-	public void setDeptno(Integer deptno) {
-		this.deptno = deptno;
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
+	}
+
+	public String getPhone_number() {
+		return phone_number;
+	}
+
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
+	}
+
+	public String getEmergency_contact_name() {
+		return emergency_contact_name;
+	}
+
+	public void setEmergency_contact_name(String emergency_contact_name) {
+		this.emergency_contact_name = emergency_contact_name;
+	}
+
+	public String getEmergency_contact_phone() {
+		return emergency_contact_phone;
+	}
+
+	public void setEmergency_contact_phone(String emergency_contact_phone) {
+		this.emergency_contact_phone = emergency_contact_phone;
+	}
+
+	public Employee(Integer employee_id, String first_name, String last_name, Date start_date, Double start_salary,
+			String contract_signed, Integer ssn, Date birthdate, String phone_number, String emergency_contact_name,
+			String emergency_contact_phone) {
+		super();
+		this.employee_id = employee_id;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.start_date = start_date;
+		this.start_salary = start_salary;
+		this.contract_signed = contract_signed;
+		this.ssn = ssn;
+		this.birthdate = birthdate;
+		this.phone_number = phone_number;
+		this.emergency_contact_name = emergency_contact_name;
+		this.emergency_contact_phone = emergency_contact_phone;
 	}
 
 	@Override
 	public String toString() {
-		return "Employee{" +
-                "empno=" + empno+
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", designation='" + designation + '\'' +
-                ", hiredate='" + hiredate + '\'' +
-                ", salary='" + salary + '\'' +
-                ", comm='" + comm + '\'' +
-                ", deptno='" + deptno + '\'' +
-                '}';
+		return "Employee [employee_id=" + employee_id + ", first_name=" + first_name + ", last_name=" + last_name
+				+ ", start_date=" + start_date + ", start_salary=" + start_salary + ", contract_signed="
+				+ contract_signed + ", ssn=" + ssn + ", birthdate=" + birthdate + ", phone_number=" + phone_number
+				+ ", emergency_contact_name=" + emergency_contact_name + ", emergency_contact_phone="
+				+ emergency_contact_phone + "]";
 	}
+	
+	
+	
 }
