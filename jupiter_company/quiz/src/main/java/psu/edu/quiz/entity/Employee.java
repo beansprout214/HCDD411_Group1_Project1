@@ -1,5 +1,6 @@
 package psu.edu.quiz.entity;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import jakarta.persistence.*;
@@ -23,13 +24,13 @@ public class Employee {
 	private Date start_date;
 	
 	@Column(name="start_salary")
-	private Double start_salary;
-	
+	private BigDecimal start_salary;
+
 	@Column(name="contract_signed")
 	private String contract_signed;
 	
 	@Column(name="ssn")
-	private Integer ssn;
+	private String ssn;
 	
 	@Column(name="birthdate")
 	private Date birthdate;
@@ -75,11 +76,11 @@ public class Employee {
 		this.start_date = start_date;
 	}
 
-	public Double getStart_salary() {
+	public BigDecimal getStart_salary() {
 		return start_salary;
 	}
 
-	public void setStart_salary(Double start_salary) {
+	public void setStart_salary(BigDecimal start_salary) {
 		this.start_salary = start_salary;
 	}
 
@@ -91,11 +92,11 @@ public class Employee {
 		this.contract_signed = contract_signed;
 	}
 
-	public Integer getSsn() {
+	public String getSsn() {
 		return ssn;
 	}
 
-	public void setSsn(Integer ssn) {
+	public void setSsn(String ssn) {
 		this.ssn = ssn;
 	}
 
@@ -131,8 +132,8 @@ public class Employee {
 		this.emergency_contact_phone = emergency_contact_phone;
 	}
 
-	public Employee(Integer employee_id, String first_name, String last_name, Date start_date, Double start_salary,
-			String contract_signed, Integer ssn, Date birthdate, String phone_number, String emergency_contact_name,
+	public Employee(Integer employee_id, String first_name, String last_name, Date start_date, BigDecimal start_salary,
+			String contract_signed, String ssn, Date birthdate, String phone_number, String emergency_contact_name,
 			String emergency_contact_phone) {
 		super();
 		this.employee_id = employee_id;
