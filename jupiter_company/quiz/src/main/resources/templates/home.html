@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Employee System</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #eaeded;
+            color: #111;
+        }
+
+        .main {
+            max-width: 900px;
+            margin: 60px auto;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 32px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .amazon-btn {
+            background-color: #ffd814;
+            border-radius: 20px;
+            border: 1px solid #fcd200;
+            padding: 10px 24px;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #111;
+            display: inline-block;
+            margin: 12px;
+        }
+
+        .amazon-btn:hover {
+            background-color: #f7ca00;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="main">
+
+    <img class="logo"
+         src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
+         width="160">
+
+    <h1>Welcome to the Employee Management System</h1>
+
+    <p style="margin-bottom: 30px; font-size: 16px;">
+        Choose an option below to get started.
+    </p>
+
+    <a th:href="@{/employees/list}" class="amazon-btn">
+        View Employee List
+    </a>
+
+    <a th:href="@{/employees/showFormForAdd}" class="amazon-btn"
+       sec:authorize="hasAnyRole('MANAGER','ADMIN')">
+        Add New Employee
+    </a>
+
+    <form action="#" th:action="@{/logout}" method="POST" style="margin-top: 20px;">
+        <input type="submit" class="amazon-btn" value="Logout" />
+    </form>
+
+</div>
+
+</body>
+</html>
