@@ -13,40 +13,33 @@ public class DemoSecurityConfig {
 
     @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
-
-        UserDetails lebron = User.builder()
-                .username("lebron")
-                .password("{noop}test123")
-                .roles("SUPERVISOR")
-                .build();
-        
         UserDetails john = User.builder()
                 .username("john")
                 .password("{noop}test123")
-                .roles("SUPERVISOR", "MANAGER")
+                .roles("EMPLOYEE")
                 .build();
  
         UserDetails mary = User.builder()
                 .username("mary")
                 .password("{noop}test123")
-                .roles("SUPERVISOR", "MANAGER","DIRECTOR")
+                .roles("EMPLOYEE","MANAGER")
                 .build();
  
         UserDetails susan = User.builder()
                 .username("susan")
                 .password("{noop}test123")
-                .roles("SUPERVISOR", "MANAGER","DIRECTOR","ADMIN")
+                .roles("EMPLOYEE","MANAGER","ADMIN")
                 .build();
  
-        return new InMemoryUserDetailsManager(lebron, john, mary, susan);
+        return new InMemoryUserDetailsManager(john, mary, susan);
     }
     
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 		http.authorizeHttpRequests(configurer -> configurer
-				.requestMatchers("/").hasRole("SUPERVISOR")
-				.requestMatchers("/employees/showFormForAdd").hasAnyRole("DIRECTOR","ADMIN","MANAGER")
+				.requestMatchers("/").hasRole("EMPLOYEE")
+				.requestMatchers("/employees/showFormForAdd").hasAnyRole("ADMIN","MANAGER")
 				.anyRequest().authenticated())
 				.formLogin(form -> form.loginPage("/showMyLoginPage").loginProcessingUrl("/authenticateTheUser")
 						.permitAll())
