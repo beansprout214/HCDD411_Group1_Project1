@@ -50,7 +50,7 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/showFormForUpdate")
-	public String showFormForUpdate(@RequestParam("empno") int theId,Model theModel) {
+	public String showFormForUpdate(@RequestParam("employee_id") int theId,Model theModel) {
 		
 		Employee theEmployee = employeeService.findById(theId);
 		theModel.addAttribute("employee",theEmployee);
@@ -58,14 +58,14 @@ public class EmployeeController {
 	}
 
 	@PostMapping("/save")
-	public String saveEmployee(@ModelAttribute("empno") Employee theEmployee) {
+	public String saveEmployee(@ModelAttribute("employee_id") Employee theEmployee) {
 		employeeService.save(theEmployee);
 		
 		return "redirect:/employees/list";
 	}
 	
 	@GetMapping("/delete")
-	public String delete(@RequestParam("empno") int theId) {
+	public String delete(@RequestParam("employee_id") int theId) {
 		employeeService.deleteById(theId);
 		
 		return "redirect:/employees/list";
