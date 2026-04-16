@@ -2,113 +2,37 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8" />
-    <title>Login - hcddmarket</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background-color: #eaeded;
-            color: #111;
-        }
-
-        /* Login card */
-        .login-container {
-            max-width: 420px;
-            margin: 60px auto;
-            background-color: #fff;
-            padding: 28px 32px;
-            border-radius: 4px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-        }
-
-        .login-title {
-            font-size: 22px;
-            margin-bottom: 18px;
-            font-weight: bold;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 10px 12px;
-            margin-bottom: 16px;
-            border: 1px solid #a6a6a6;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-
-        .amazon-btn {
-            width: 100%;
-            background-color: #f7ca00;
-            border: 1px solid #f2c200;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 15px;
-            cursor: pointer;
-            margin-top: 6px;
-        }
-
-        .amazon-btn:hover {
-            background-color: #eebd00;
-        }
-
-        .alert {
-            padding: 10px;
-            border-radius: 4px;
-            margin-bottom: 16px;
-            font-size: 14px;
-        }
-
-        .alert-danger {
-            background-color: #fddede;
-            border: 1px solid #cc0c39;
-            color: #a40000;
-        }
-
-        .alert-success {
-            background-color: #d4f5d2;
-            border: 1px solid #4caf50;
-            color: #2e7d32;
-        }
-    </style>
+    <meta charset="utf-8">
+    <title>Login</title>
 </head>
 
 <body>
-    <div class="login-container">
 
-        <div class="login-title">Sign-In</div>
+<h1>Login</h1>
 
-        <form action="#" th:action="@{/authenticateTheUser}" method="POST">
+<form th:action="@{/authenticateTheUser}" method="POST">
 
-            <div th:if="${param.error}">
-                <div class="alert alert-danger">
-                    Invalid username or password.
-                </div>
-            </div>
-
-            <input type="text" name="username" placeholder="Username" class="input-field" />
-
-            <input type="password" name="password" placeholder="Password" class="input-field" />
-
-            <button type="submit" class="amazon-btn">Login</button>
-
-            <div th:if="${param.logout}">
-                <div class="alert alert-success" style="margin-top: 16px;">
-                    You have been logged out.
-                </div>
-            </div>
-
-        </form>
-
+    <div th:if="${param.error}">
+        <p style="color:red;">Invalid username or password.</p>
     </div>
 
-</body>
+    <p>
+        Username:
+        <input type="text" name="username">
+    </p>
 
+    <p>
+        Password:
+        <input type="password" name="password">
+    </p>
+
+    <button type="submit">Login</button>
+
+    <div th:if="${param.logout}">
+        <p style="color:green;">You have been logged out.</p>
+    </div>
+
+</form>
+
+</body>
 </html>
