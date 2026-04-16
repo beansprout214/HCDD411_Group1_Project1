@@ -1,17 +1,27 @@
 package psu.edu.quiz.security;
 
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class DemoSecurityConfig {
+	
+	@Bean
+	public UserDetailsManager userDetailsManager(DataSource dataSource) {
+		
+		return new JdbcUserDetailsManager(dataSource);
+	}
 
-    @Bean
+   /* @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
         UserDetails john = User.builder()
                 .username("john")
@@ -32,7 +42,7 @@ public class DemoSecurityConfig {
                 .build();
  
         return new InMemoryUserDetailsManager(john, mary, susan);
-    }
+    } */
     
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -41,9 +51,13 @@ public class DemoSecurityConfig {
 				.requestMatchers("/").hasRole("EMPLOYEE")
 				.requestMatchers("/employees/showFormForAdd").hasAnyRole("ADMIN","MANAGER")
 				.anyRequest().authenticated())
-				.formLogin(form -> form.loginPage("/showMyLoginPage").loginProcessingUrl("/authenticateTheUser")
+				.formLogin(form -> 
+						form
+						.loginPage("/showMyLoginPage")
+						.loginProcessingUrl("/authenticateTheUser")
 						.permitAll())
-				.logout(logout -> logout.permitAll())
+				.logout(logout -> 
+					logout.permitAll())
 				.exceptionHandling(configurer -> configurer.accessDeniedPage("/access-denied"));
 
 		return http.build();
