@@ -3,74 +3,164 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Save Employee</title>
+    <title>Jupiter Company – Save Employee</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4b79a1, #283e51);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 40px;
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            width: 420px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.85;
+            margin-bottom: 25px;
+        }
+
+        form {
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+		
+		.actions {
+		    display: flex;
+		    flex-direction: column;
+		    gap: 12px;
+		    margin-top: 10px;
+		    width: 100%;
+		}
+
+		.actions a,
+		.actions button {
+		    display: block;
+		    width: 100%;
+		    text-align: center;
+		    padding: 12px;
+		    background: rgba(255, 255, 255, 0.25);
+		    border: none;
+		    border-radius: 8px;
+		    color: white;
+		    text-decoration: none;
+		    font-weight: 600;
+		    font-size: 15px;
+		    cursor: pointer;
+		    transition: background 0.2s ease;
+		    box-sizing: border-box;
+		}
+
+        .actions a:hover,
+        .actions button:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .save-btn {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .save-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+		
+		.actions a.back-btn {
+		background: rgb(223, 142, 32) !important;
+		    color: white;
+		}
+
+		.actions a.back-btn:hover {
+		background: rgb(199, 104, 35) !important;
+		    color: white;
+		}
+    </style>
 </head>
 
 <body>
 
-<h1>Enter Employee Information</h1>
+<div class="glass">
 
-<form action="#" th:action="@{/employees/save}" th:object="${employee}" method="POST">
+    <div class="logo">Jupiter Company ✈️</div>
+    <div class="subtitle">Enter Employee Information</div>
 
-    <input type="hidden" th:field="*{employee_id}" />
+    <form action="#" th:action="@{/employees/save}" th:object="${employee}" method="POST">
 
-    <p>
-        First Name:
+        <input type="hidden" th:field="*{employee_id}" />
+
+        <label>First Name:</label>
         <input type="text" th:field="*{first_name}" required>
-    </p>
 
-    <p>
-        Last Name:
+        <label>Last Name:</label>
         <input type="text" th:field="*{last_name}" required>
-    </p>
 
-    <p>
-        Start Date:
+        <label>Start Date:</label>
         <input type="date" th:field="*{start_date}" required>
-    </p>
 
-    <p>
-        Start Salary:
+        <label>Start Salary:</label>
         <input type="number" step="0.01" th:field="*{start_salary}" required>
-    </p>
 
-    <p>
-        Contract Signed (Y/N):
+        <label>Contract Signed (Y/N):</label>
         <input type="text" th:field="*{contract_signed}" required>
-    </p>
 
-    <p>
-        SSN (no dashes):
+        <label>SSN (no dashes):</label>
         <input type="number" th:field="*{ssn}" required>
-    </p>
 
-    <p>
-        Birthdate:
+        <label>Birthdate:</label>
         <input type="date" th:field="*{birthdate}" required>
-    </p>
 
-    <p>
-        Phone Number:
+        <label>Phone Number:</label>
         <input type="text" th:field="*{phone_number}">
-    </p>
 
-    <p>
-        Emergency Contact Name:
+        <label>Emergency Contact Name:</label>
         <input type="text" th:field="*{emergency_contact_name}">
-    </p>
 
-    <p>
-        Emergency Contact Phone:
+        <label>Emergency Contact Phone:</label>
         <input type="text" th:field="*{emergency_contact_phone}">
-    </p>
 
-    <button type="submit">Save Employee</button>
+        <div class="actions">
+            <button type="submit" class="save-btn">Save Employee</button>
 
-</form>
+            <a th:href="@{/employees/list}" class="back-btn">Back to Employees List</a>
+        </div>
 
-<p>
-    <a th:href="@{/employees/list}">Back to Employees List</a>
-</p>
+    </form>
+
+</div>
 
 </body>
 </html>

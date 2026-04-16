@@ -4,26 +4,110 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Jupiter Company – Home</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4b79a1, #283e51);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 40px;
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            width: 360px;
+            text-align: center;
+            color: white;
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            opacity: 0.85;
+            margin-bottom: 25px;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .actions a,
+        .actions button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.25);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            box-sizing: border-box;
+        }
+
+        .actions a:hover,
+        .actions button:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+		.actions button.logout-btn {
+		    background: rgb(203, 52, 56) !important;
+		    color: white;
+		}
+
+		.actions button.logout-btn:hover {
+		    background: rgb(160, 35, 38) !important;
+		    color: white;
+		}
+
+        .actions form {
+            margin: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
 
-<h1>Employee Management System</h1>
+<div class="glass">
 
-<p>Choose an option:</p>
+    <div class="logo">Jupiter Company ✈️</div>
+    <div class="subtitle">Employee Management Portal</div>
 
-<p>
-    <a th:href="@{/employees/list}">View Employee List</a>
-</p>
+    <div class="actions">
+        <a th:href="@{/employees/list}">View Employee List</a>
 
-<p sec:authorize="hasAnyRole('MANAGER','ADMIN')">
-    <a th:href="@{/employees/showFormForAdd}">Add New Employee</a>
-</p>
+        <a th:href="@{/employees/showFormForAdd}"
+           sec:authorize="hasAnyRole('MANAGER','ADMIN')">
+            Add New Employee
+        </a>
 
-<form th:action="@{/logout}" method="POST">
-    <button type="submit">Logout</button>
-</form>
+        <form th:action="@{/logout}" method="POST">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+
+</div>
 
 </body>
 </html>
