@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Jupiter Company – Access Denied</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4b79a1, #283e51);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 40px;
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            width: 420px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.85;
+            margin-bottom: 25px;
+        }
+
+        ul {
+            text-align: left;
+            margin: 20px auto;
+            width: 80%;
+            opacity: 0.9;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .actions a,
+        .actions button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.25);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            box-sizing: border-box;
+        }
+
+        .actions a:hover,
+        .actions button:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+		
+		.main-message {
+		    font-size: 18px;
+		    font-weight: bold;
+		    margin-bottom: 20px;
+		}
+
+    </style>
+</head>
+
+<body>
+
+<div class="glass">
+
+    <div class="logo">Jupiter Company ✈️</div>
+    <div class="subtitle">Access Denied</div>
+	
+	<p class="main-message">You are not authorized to access this page.</p>
+
+
+    <ul>
+        <li>Your role may not have permission for this action.</li>
+        <li>You may need a higher access level.</li>
+        <li>You may have followed a restricted or outdated link.</li>
+    </ul>
+
+    <div class="actions">
+        <a th:href="@{/}">Back to Home Page</a>
+    </div>
+
+</div>
+
+</body>
+</html>

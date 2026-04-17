@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Jupiter Company – Employee Directory</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4b79a1, #283e51);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0 40px 0;
+            color: white;
+            position: relative;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 40px;
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            width: 90%;
+            max-width: 1200px;
+            text-align: center;
+            margin-top: 80px; 
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            opacity: 0.85;
+            margin-bottom: 25px;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+            color: white;
+            font-size: 14px;
+        }
+
+        thead th {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 12px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        tbody td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        /* Action buttons */
+        .actions {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .actions a,
+        .actions button,
+        table a {
+            display: inline-block;
+            padding: 8px 14px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 6px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+
+        .actions a:hover,
+        .actions button:hover,
+        table a:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .logout-btn {
+            background: rgb(203, 52, 56) !important;
+        }
+
+        .logout-btn:hover {
+            background: rgb(160, 35, 38) !important;
+        }
+
+        .actions button,
+        .actions button:focus,
+        .actions button:active {
+            outline: none;
+            border: none;
+        }
+
+        /* --- Search Form Styling --- */
+        .search-container {
+            margin: 20px auto 30px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            max-width: fit-content;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .search-container input[type="text"] {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            padding: 10px 15px;
+            color: white;
+            width: 250px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-container input[type="text"]::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .search-container input[type="text"]:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+        }
+
+        .search-container .search-btn {
+            background: #2ecc71;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-container .search-btn:hover {
+            background: #27ae60;
+        }
+
+        .search-container .clear-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .search-container .clear-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .del-btn {
+            background: rgb(223, 142, 32) !important;
+            color: white;
+        }
+
+        .del-btn:hover {
+            background: rgb(199, 104, 35) !important;
+            color: white;
+        }
+
+        /* --- User Profile Styling --- */
+        .user-profile {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 18px;
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .user-info-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1px;
+        }
+
+        .user-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+            font-weight: bold;
+        }
+
+        .user-value {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .role-badge {
+            display: inline-block;
+            font-size: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-style: italic;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /* --- End User Profile Styling --- */
+    </style>
+</head>
+
+<body>
+
+    <!-- User Info Badge -->
+    <div class="user-profile">
+        <div class="user-info-group">
+            <div class="user-label">Logged in as</div>
+            <div class="user-value">
+                👤 <span sec:authentication="principal.username">Username</span>
+            </div>
+        </div>
+        <div class="role-badge">
+            <span sec:authentication="principal.authorities">ROLE_USER</span>
+        </div>
+    </div>
+
+    <div class="glass">
+
+        <div class="logo">Jupiter Company ✈️</div>
+        <div class="subtitle">Employee Directory</div>
+
+        <form th:action="@{/employees/search}" method="get" class="search-container">
+            <input type="text" name="last_name" placeholder="Search by last name..." />
+            <button type="submit" class="search-btn">Search</button>
+            <a th:href="@{/employees/list}" class="clear-btn">Clear</a>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Start Date</th>
+                    <th>Salary</th>
+                    <th>Contract</th>
+                    <th>SSN</th>
+                    <th>Birthdate</th>
+                    <th>Phone</th>
+                    <th>Emergency Contact</th>
+                    <th>Emergency Phone</th>
+                    <th sec:authorize="hasAnyRole('MANAGER','ADMIN')">Update</th>
+                    <th sec:authorize="hasAnyRole('ADMIN')">Delete</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="tempEmployee : ${employees}">
+                    <td th:text="${tempEmployee.employee_id}">1</td>
+                    <td th:text="${tempEmployee.first_name}">John</td>
+                    <td th:text="${tempEmployee.last_name}">Doe</td>
+                    <td th:text="${tempEmployee.start_date}">2023-01-01</td>
+                    <td th:text="${tempEmployee.start_salary}">$50,000</td>
+                    <td th:text="${tempEmployee.contract_signed}">Yes</td>
+                    <td th:text="${tempEmployee.ssn}">***-**-****</td>
+                    <td th:text="${tempEmployee.birthdate}">1990-01-01</td>
+                    <td th:text="${tempEmployee.phone_number}">555-0199</td>
+                    <td th:text="${tempEmployee.emergency_contact_name}">Jane Doe</td>
+                    <td th:text="${tempEmployee.emergency_contact_phone}">555-0100</td>
+
+                    <td sec:authorize="hasAnyRole('MANAGER','ADMIN')">
+                        <a th:href="@{/employees/showFormForUpdate(employee_id=${tempEmployee.employee_id})}">
+                            Update
+                        </a>
+                    </td>
+
+                    <td sec:authorize="hasAnyRole('ADMIN')">
+                        <a th:href="@{/employees/delete(employee_id=${tempEmployee.employee_id})}"
+                           onclick="return confirm('Are you sure?')"
+                           class="del-btn">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="actions">
+            <a th:href="@{/employees/showFormForAdd}" sec:authorize="hasRole('MANAGER')">
+                Add Employee
+            </a>
+
+            <form th:action="@{/logout}" method="POST">
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+</html>

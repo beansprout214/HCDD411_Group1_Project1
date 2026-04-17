@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="utf-8">
+    <title>Jupiter Company – Login</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4b79a1, #283e51);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 40px;
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            width: 360px;
+            text-align: center;
+            color: white;
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            opacity: 0.85;
+            margin-bottom: 25px;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .actions button,
+        .actions a {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.25);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            box-sizing: border-box;
+        }
+
+        .actions button:hover,
+        .actions a:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .login-btn {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .login-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .error {
+            background: rgba(255, 80, 80, 0.4);
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .success {
+            background: rgba(80, 200, 120, 0.4);
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="glass">
+
+    <div class="logo">Jupiter Company ✈️</div>
+    <div class="subtitle">Employee Login</div>
+
+    <form th:action="@{/authenticateTheUser}" method="POST">
+
+        <div th:if="${param.error}" class="error">
+            Invalid username or password.
+        </div>
+
+        <input type="text" name="username" placeholder="Username">
+
+        <input type="password" name="password" placeholder="Password">
+
+        <div class="actions">
+            <button type="submit" class="login-btn">Login</button>
+        </div>
+
+        <div th:if="${param.logout}" class="success">
+            You have been logged out.
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>
